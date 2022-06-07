@@ -22,11 +22,6 @@ Auth::routes();
 
 Route::get('/enregistrement', [\App\Http\Controllers\AbonneController::class, 'index'])->name('Form');
 
-Route::get('/direction', function () {
-    return view('direction');
-});
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -34,6 +29,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-Route::resource('abonne', AbonneController::class);
+Route::resource('/abonne', AbonneController::class);
+
+
 
 

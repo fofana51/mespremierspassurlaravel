@@ -11,55 +11,56 @@
 </div>
 @endif
         <form action="{{route('abonne.store')}}" method="post" class="row my-5 d-flex row-direction-column">
+       @csrf
         <div class="container_fluid">
             <center>
             <div class="row my-5 d-flex row-direction-column justify-content-center">
-                    <div class="row-col-md-4">
+                    <div class="row-col-md-6">
                     <i class="fa-solid fa-user"></i>
-                        <input type="text" name="nom" id="" placeholder="Nom" pattern="[a-zA-Z]{1,}" required="">
+                        <input type="text" name="nom" id="" placeholder="Nom"  style="min-width:300px; min-height:40px" pattern="[a-zA-Z]{1,}" required="">
                     </div>
-                            <div class="row-col-md-4">
+                            <div class="row-col-md-6">
                             <i class="fa-solid fa-circle-user"></i>
-                                <input type="text" name="prenom" id="" placeholder="Prénom" pattern="[a-zA-Z]{1,}" required="">
+                                <input type="text" name="prenom" id="" placeholder="Prénom"  style="min-width:300px; min-height:40px" pattern="[a-zA-Z]{1,}" required="">
                             </div>
-                            <div class="row-col-md-4">
+                            <div class="row-col-md-6">
                             <i class="fa-solid fa-cake-candles"></i>
-                                <input type="datetime" name="naissance" id="" placeholder="Date de naissance"  required="">
+                                <input type="text" onfocus="this.type='date'"  style="min-width:300px; min-height:40px" name="naissance" id="" placeholder="Date de naissance"  required="">
                             </div>
-                            <div class="row-col-md-4">
+                            <div class="row-col-md-6">
                             <i class="fa-solid fa-at"></i>
-                                <input type="email" name="email" id="" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                <input type="email" name="email" id="" placeholder="E-mail"  style="min-width:300px; min-height:40px"
                                 required="">
                             </div> 
-                    <div class="row-col-md-4">
-                    <i class="fa-solid fa-hourglass-start"></i>
-                        <input type="datetime" name="debut_abonnement" id="" placeholder="Début d'abonnement"  required="">
-                    </div>
-                    <div class="row-col-md-4">
+                    
+                    <div class="row-col-md-6">
                     <i class="fa-solid fa-hourglass-end"></i>
-                        <input type="datetime" name="fin" id="" placeholder="Fin d'abonnement">
+                        <input type="text" onfocus="this.type='date'"  style="min-width:300px; min-height:40px" name="fin_abonnement" id="" placeholder="Fin d'abonnement">
                     </div>
                     <br>
-                    <div class="row-col-md-4">
+                    <div class="row-col-md-6">
                     <i class="fa-solid fa-phone"></i>
-                        <input type="text" name="numero" id="" placeholder="Numéro"  pattern="[0-9]{1,}" required="">
+                        <input type="text" name="numero" id="" placeholder="Numéro"  pattern="[0-9]{1,}" 
+                        style="min-width:300px; min-height:40px"
+                        required>
                     </div>
                     <br>
                    
-                    <div class="row-col-md-4">
+                    <div class="row-col-md-6">
                         <i class="fa-solid fa-mars-and-venus"></i>
-                         <input type="radio" name="radio" value="M" id=""  required="">male <input type="radio" name="radio" id=""  value="F" required="">Female
+                         <input type="radio" name="genre" value="M" id=""  style="min-width:20px; min-height: 20px;" required><span style="color: white;"> male </span>
+                         <input type="radio" name="genre" id=""  value="F" style="min-width:20px; min-height: 20px;" ><span style="color: white;"> Female</span>
                     </div>
-                    <div class="col-md-3">  
+                    <div class="col-md-4">  
                              <i class="fa-solid fa-user-plus"></i>
-                                 <input type="submit" value="Enregistré" style="color: brown;"></h2>
+                                 <input type="submit" value="Enregistré" style="color: brown; min-width:170px"></h2>
                     </div>
                 </div>
                 </center>
                 </div>
             </form>
         
-  <p class="mb-0 text-center font-weight-bold"><a href="{{route('list')}}" class="list-unstyled text-light"> LISTES</a></p>
+  <p class="mb-0 text-center font-weight-bold"><a href="{{route('abonne.index')}}" class="list-unstyled text-light"> LISTES</a></p>
         <br><br>
         
          

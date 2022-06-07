@@ -4,13 +4,13 @@
         </div>
         <div class="container">
             <div class="row d-flex justify-content-around align-items-center">
-                <a class="col-md-3 fs-5 w-100 " href="{{route('abonne.index')}}">
+                <a class="col-md-3 fs-5 w-100 " href="{{route('abonne.create')}}">
                         <h3>
                         <i class="fa-solid fa-user-group"></i>
                          Enregistrement d'abonnés
                         </h3>
                 </a>
-                <a class="col-md-3 w-100 fs-5 " href="{{route('liste')}}">
+                <a class="col-md-3 w-100 fs-5 " href="{{route('abonne.index')}}">
                       <h3>
                         <i class="fa-solid fa-list-check"></i>
                             Listes des abonnés

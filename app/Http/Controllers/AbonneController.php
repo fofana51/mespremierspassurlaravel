@@ -16,8 +16,8 @@ class AbonneController extends Controller
      */
     public function index()
     {
-        $abonne = Abonne::orderBy('created_at', 'Asc')->first();
-        return view("enregistrement", compact("abonne"));
+        $abonnes = Abonne::all();
+        return view("liste", compact("abonnes"));
         
     }
 
@@ -26,10 +26,10 @@ class AbonneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function create()
     {
-        $abonne=Abonne::all();
-        return view('liste', compact('abonne'));
+        
+        return view('enregistrement');
     }
 
     /**
@@ -40,15 +40,30 @@ class AbonneController extends Controller
      */
     public function store(Request $request)
     {
-        $abonne= new Abonne();
-        $abonne->nom=$request->input('nom');
-        $abonne->prenom=$request->input('prenom');
-        $abonne->naissance=$request->input('naissance');
-        $abonne->email=$request->input('email');
-        $abonne->fin_abonnement=$request->input('fin_abonnement');
-        $abonne->numero=$request->input('numero');
-        $abonne->genre=$request->input('genre');
-        $abonne->save();
+        // $abonnes= new Abonne();
+        // $abonnes->nom=$request->input('nom');
+        // $abonnes->prenom=$request->input('prenom');
+        // $abonnes->naissance=$request->input('naissance');
+        // $abonnes->email=$request->input('email');
+        // $abonnes->fin_abonnement=$request->input('fin_abonnement');
+        // $abonnes->numero=$request->input('numero');
+        // $abonnes->genre=$request->input('genre');
+        // $abonnes->save();
+         request()->validate([
+            'email' => 'required|email|unique:abonnes'
+        ]);
+
+        Abonne::create([
+        "nom"=>$request->nom,
+        "prenom"=>$request->prenom,
+        "naissance"=>$request->naissance,
+        "email"=>$request->email,
+        "numero"=>$request->numero,
+        "fin_abonnement"=>$request->fin_abonnement,
+        "genre"=>$request->genre
+        ]);
+         return back()->with('message','Abonné ajouté avec succès!');
+
     }
 
     /**
@@ -70,8 +85,8 @@ class AbonneController extends Controller
      */
     public function edit($id)
     {
-        $abonne=Abonne::find($id);
-        return view('edit', compact('abonne'));
+        $abonnes=Abonne::find($id);
+        return view('direction', compact('abonnes'));
 
     }
 
@@ -85,17 +100,20 @@ class AbonneController extends Controller
     public function update(Request $request, $id)
     {
         
-        $abonne= Abonne::find($id);
-        $abonne->nom=$request->input('nom');
-        $abonne->prenom=$request->input('prenom');
-        $abonne->naissance=$request->input('naissance');
-        $abonne->email=$request->input('email');
-        $abonne->fin_abonnement=$request->input('fin_abonnement');
-        $abonne->numero=$request->input('numero');
-        $abonne->genre=$request->input('genre');
-        $abonne->save();
-        $abonne->Abonne::All();
-        return redirect('list')->with('success','Modification effectué avec succès!');
+        $abonnes= Abonne::find($id);
+       
+        Abonne::create([
+            "nom"=>$request->nom,
+            "prenom"=>$request->prenom,
+            "naissance"=>$request->naissance,
+            "email"=>$request->email,
+            "numero"=>$request->numero,
+            "fin_abonnement"=>$request->fin_abonnement,
+            "genre"=>$request->genre
+            ]);
+            return redirect("{{route('abonne.index')}}")->with('success','Modification effectué avec succès!');
+
+        
 
 
     }
@@ -103,13 +121,13 @@ class AbonneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Abonne  $abonne
+     * @param  \App\Models\Abonne  $abonnes
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $abonne= Abonne::find($id);
         $abonne->delete();
-        return redirect('list');
+        return redirect("{{route('abonne.index')}}")->with('message','Suppression effectué avec succès');
     }
 }
